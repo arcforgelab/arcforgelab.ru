@@ -12,10 +12,10 @@ import { skills } from "@/data/content";
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { id: "frontend", title: "Frontend", tone: "from-cyan-400/30 to-blue-500/30" },
-  { id: "backend", title: "Backend / API", tone: "from-indigo-400/30 to-purple-500/30" },
-  { id: "devops", title: "DevOps", tone: "from-emerald-400/30 to-teal-500/30" },
-  { id: "tools", title: "DX & Craft", tone: "from-amber-300/30 to-orange-500/30" },
+  { id: "frontend", title: "Фронтенд", tone: "from-yellow-200/60 to-amber-100/50" },
+  { id: "backend", title: "Бэкенд / API", tone: "from-slate-200/50 to-stone-100/60" },
+  { id: "devops", title: "DevOps", tone: "from-lime-200/50 to-amber-100/50" },
+  { id: "tools", title: "DX & дизайн", tone: "from-slate-100/60 to-white/40" },
 ] as const;
 
 export function SkillsSection() {
@@ -42,8 +42,8 @@ export function SkillsSection() {
     <section ref={scope} id="skills" className="relative mx-auto max-w-6xl px-6 pb-20">
       <div className="mb-8 flex items-center justify-between gap-4">
         <div className="space-y-2">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Capabilities</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">Front to back, production-ready.</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Навыки</p>
+          <h2 className="text-3xl font-semibold sm:text-4xl">От фронта до DevOps — готово к продакшену.</h2>
         </div>
         <Badge variant="outline" className="hidden border-primary/40 bg-primary/10 text-primary sm:inline-flex">
           Full-stack + DevOps
@@ -63,7 +63,7 @@ export function SkillsSection() {
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold">{group.title}</h3>
                 <Badge variant="outline" className="border-white/10 bg-white/5 text-xs uppercase tracking-wide">
-                  Motion-aware
+                  Motion-first
                 </Badge>
               </div>
               <Separator className="bg-white/10" />

@@ -21,9 +21,9 @@ import {toast} from "sonner";
 gsap.registerPlugin(ScrollTrigger);
 
 const schema = z.object({
-  name: z.string().min(2, "Add your name"),
-  email: z.string().email("Valid email required"),
-  project: z.string().min(10, "Tell us about your project"),
+  name: z.string().min(2, "Укажите имя"),
+  email: z.string().email("Введите корректный email"),
+  project: z.string().min(10, "Опишите задачу подробнее"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -47,13 +47,13 @@ export function ContactSection() {
 
   const onSubmit = async (values: FormValues) => {
     setStatus("sending");
-    toast("Sending...", {
-      description: `Packaging ${values.name}'s brief with motion.`,
+    toast("Отправляем...", {
+      description: `Упаковываем заявку ${values.name} вместе с анимациями.`,
     });
     await new Promise((resolve) => setTimeout(resolve, 1400));
     setStatus("sent");
-    toast.success("Received!", {
-      description: `We will respond to ${values.email} within one business day.`,
+    toast.success("Получили!", {
+      description: `Ответим на ${values.email} в течение одного рабочего дня.`,
     });
     form.reset();
     setTimeout(() => setStatus("idle"), 1500);
@@ -66,18 +66,17 @@ export function ContactSection() {
         <div className="relative grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
             <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary">
-              Let&apos;s build
+              Обсудим задачу
             </Badge>
-            <h2 className="text-3xl font-semibold sm:text-4xl">Tell us about your product.</h2>
+            <h2 className="text-3xl font-semibold sm:text-4xl">Расскажите о продукте.</h2>
             <p className="text-muted-foreground">
-              Whether it&apos;s a prototype or a platform, we orchestrate shadcn/ui blocks, GSAP motion,
-              and resilient backends into one delivery stream.
+              Прототип или платформа — соберём UI на shadcn/ui, анимации на GSAP и надёжный бэкенд с DevOps‑практиками.
             </p>
             <Separator className="bg-white/10" />
             <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-              <Badge variant="secondary" className="bg-secondary/70">Discovery call → Architecture → Build</Badge>
-              <Badge variant="secondary" className="bg-secondary/70">Motion & micro-interactions included</Badge>
-              <Badge variant="secondary" className="bg-secondary/70">Transparent weekly demos</Badge>
+              <Badge variant="secondary" className="bg-secondary/70">Созвон → Архитектура → Спринты</Badge>
+              <Badge variant="secondary" className="bg-secondary/70">Анимации и микро-интеракции входят</Badge>
+              <Badge variant="secondary" className="bg-secondary/70">Еженедельные демо и метрики</Badge>
             </div>
           </div>
 
@@ -88,9 +87,9 @@ export function ContactSection() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Имя</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ada Lovelace" {...field} />
+                      <Input placeholder="Ада Лавлейс" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -114,10 +113,10 @@ export function ContactSection() {
                 name="project"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Project vision</FormLabel>
+                    <FormLabel>Коротко о проекте</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="What are you building? Timeline? Key outcomes?"
+                        placeholder="Что делаем? Сроки? Ключевые результаты?"
                         className="min-h-[140px]"
                         {...field}
                       />
@@ -139,7 +138,7 @@ export function ContactSection() {
                   </>
                 ) : (
                   <>
-                    Ship the brief
+                    Отправить заявку
                     <SendHorizontal className="ml-2 h-4 w-4" />
                   </>
                 )}

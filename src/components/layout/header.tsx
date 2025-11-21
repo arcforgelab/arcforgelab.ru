@@ -6,13 +6,15 @@ import { Menu, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image";
 
 const navItems = [
-  { label: "Work", href: "#work" },
-  { label: "Skills", href: "#skills" },
-  { label: "Services", href: "#services" },
-  { label: "Clients", href: "#clients" },
-  { label: "Contact", href: "#contact" },
+  { label: "Главная", href: "/" },
+  { label: "Навыки", href: "/#skills" },
+  { label: "Услуги", href: "/#services" },
+  { label: "Проекты", href: "/work" },
+  { label: "Клиенты", href: "/#clients" },
+  { label: "Контакты", href: "/#contact" },
 ];
 
 export function Header() {
@@ -32,14 +34,14 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary/60 to-indigo-500/70 p-[2px]">
+          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-yellow-300/80 to-amber-200/80 p-[2px]">
             <div className="flex h-full w-full items-center justify-center rounded-md bg-background text-lg font-semibold text-primary">
-              A
+              <Image src={"/logo.png"} alt="Arcforgelab logo" width={24} height={24} />
             </div>
           </div>
           <div>
             <p className="text-sm font-semibold">Arcforgelab</p>
-            <p className="text-xs text-muted-foreground">Full-stack motion studio</p>
+            <p className="text-xs text-muted-foreground">Минимализм + анимация</p>
           </div>
         </Link>
         <nav className="hidden items-center gap-3 md:flex">
@@ -54,7 +56,7 @@ export function Header() {
             Remote-first
           </Badge>
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/80" asChild>
-            <Link href="#contact">Start a project</Link>
+            <Link href="#contact">Начать проект</Link>
           </Button>
         </div>
 
@@ -84,7 +86,7 @@ export function Header() {
               ))}
               <SheetClose asChild>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/80" asChild>
-                  <Link href="#contact">Start a project</Link>
+                  <Link href="/#contact">Начать проект</Link>
                 </Button>
               </SheetClose>
             </div>

@@ -13,22 +13,22 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arcforgelab — Full-Stack Studio",
+  title: "Arcforgelab — фулстек разработчик",
   description:
-    "Full-stack developer portfolio crafted with shadcn/ui, shadcnblocks, and GSAP animations.",
+    "Минималистичный портфолио-сайт фулстек разработчика: shadcn/ui, shadcnblocks, GSAP-анимации и продакшен-архитектура.",
   metadataBase: new URL("https://arcforgelab.com"),
   openGraph: {
-    title: "Arcforgelab — Full-Stack Studio",
+    title: "Arcforgelab — фулстек разработчик",
     description:
-      "Full-stack developer portfolio crafted with shadcn/ui, shadcnblocks, and GSAP animations.",
+      "Минималистичный портфолио-сайт фулстек разработчика: shadcn/ui, shadcnblocks, GSAP-анимации и продакшен-архитектура.",
     url: "https://arcforgelab.com",
     siteName: "Arcforgelab",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arcforgelab — Full-Stack Studio",
+    title: "Arcforgelab — фулстек разработчик",
     description:
-      "Full-stack developer portfolio crafted with shadcn/ui, shadcnblocks, and GSAP animations.",
+      "Минималистичный портфолио-сайт фулстек разработчика: shadcn/ui, shadcnblocks, GSAP-анимации и продакшен-архитектура.",
   },
 };
 

@@ -36,12 +36,12 @@ export function ServicesSection() {
     <section ref={scope} id="services" className="mx-auto max-w-6xl px-6 pb-20">
       <div className="mb-10 flex items-end justify-between gap-4">
         <div className="space-y-2">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Services</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">Studio-grade delivery.</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Услуги</p>
+          <h2 className="text-3xl font-semibold sm:text-4xl">Студийное качество под ключ.</h2>
         </div>
         <Button variant="outline" className="border-primary/40 bg-primary/10 text-primary">
           <Workflow className="mr-2 h-4 w-4" />
-          Engagement playbook
+          Формат работы
         </Button>
       </div>
 
@@ -71,7 +71,7 @@ export function ServicesSection() {
                 variant="ghost"
                 className="group px-0 text-primary hover:text-primary hover:underline"
               >
-                See delivery details
+                Смотреть детали
                 <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Button>
             </div>

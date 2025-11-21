@@ -32,45 +32,45 @@
 
 :root {
   --radius: 0.75rem;
-  --background: #030712;
-  --foreground: #f1f5ff;
-  --card: #080c1b;
-  --card-foreground: #f1f5ff;
-  --popover: #0a1020;
-  --popover-foreground: #f1f5ff;
-  --primary: #7cf0ff;
-  --primary-foreground: #041524;
-  --secondary: #1b2337;
-  --secondary-foreground: #f8fbff;
-  --muted: #0f172a;
-  --muted-foreground: #c7d4ff;
-  --accent: #6d7dff;
-  --accent-foreground: #f8fbff;
-  --destructive: #ff6b6b;
-  --border: #1c2439;
-  --input: #11182b;
-  --ring: #83f4ff;
+  --background: #f9fafb;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #f8d33a;
+  --primary-foreground: #1c1600;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #4b5563;
+  --accent: #fef08a;
+  --accent-foreground: #1c1600;
+  --destructive: #ef4444;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #facc15;
 }
 
 .dark {
-  --background: #020510;
-  --foreground: #e7edff;
-  --card: #0b1020;
-  --card-foreground: #e7edff;
-  --popover: #0c1224;
-  --popover-foreground: #e7edff;
-  --primary: #86ffea;
-  --primary-foreground: #041017;
-  --secondary: #0e1526;
-  --secondary-foreground: #eaefff;
-  --muted: #0a1020;
-  --muted-foreground: #b2c4ff;
-  --accent: #8f9cff;
-  --accent-foreground: #03060f;
-  --destructive: #ff7a7a;
-  --border: #182033;
-  --input: #0f1629;
-  --ring: #8df8ff;
+  --background: #0b0f19;
+  --foreground: #f8fafc;
+  --card: #0f1524;
+  --card-foreground: #f8fafc;
+  --popover: #0f1524;
+  --popover-foreground: #f8fafc;
+  --primary: #f8d33a;
+  --primary-foreground: #17120a;
+  --secondary: #11182a;
+  --secondary-foreground: #e5e7eb;
+  --muted: #0d1322;
+  --muted-foreground: #cbd5e1;
+  --accent: #fbcf2b;
+  --accent-foreground: #0f0a00;
+  --destructive: #ef4444;
+  --border: #1f2937;
+  --input: #1f2937;
+  --ring: #facc15;
 }
 
 @layer base {
@@ -80,9 +80,9 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      radial-gradient(circle at 20% 20%, rgba(127, 255, 212, 0.08), transparent 32%),
-      radial-gradient(circle at 80% 0%, rgba(109, 125, 255, 0.2), transparent 28%),
-      linear-gradient(140deg, rgba(5, 8, 20, 0.95), rgba(3, 4, 12, 0.92));
+      radial-gradient(circle at 12% 15%, rgba(248, 211, 58, 0.18), transparent 35%),
+      radial-gradient(circle at 85% 8%, rgba(251, 207, 43, 0.16), transparent 32%),
+      linear-gradient(140deg, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.95));
   }
 }
 
