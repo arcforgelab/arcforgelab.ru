@@ -10,8 +10,8 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       <div className="grid-overlay" />
-      <div className="glow left-10 top-40 h-56 w-56 rounded-full bg-primary/30" />
-      <div className="glow right-10 bottom-10 h-64 w-64 rounded-full bg-indigo-400/30" />
+      <div className="glow left-10 top-40 h-10 w-10 bg-primary/30" />
+      <div className="glow right-10 bottom-10 h-12 w-12 bg-indigo-400/30" />
       <Header />
       <main className="relative pt-20 sm:pt-24">
         <HeroSection />

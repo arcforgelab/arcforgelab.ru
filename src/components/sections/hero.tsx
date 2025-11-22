@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -21,7 +21,7 @@ const highlight = [
 ];
 
 const metrics = [
-  { label: "сервисов в обслуживании", value: "50+" },
+  { label: "Сервисов в обслуживании", value: "50+" },
   { label: "Среднее время работы пайплайна", value: "1,3мин" },
   { label: "Среднее время SLA", value: "99,9%" },
 ];
@@ -29,56 +29,159 @@ const metrics = [
 export function HeroSection() {
   const scope = useRef<HTMLDivElement | null>(null);
 
-  useGSAP(
-    () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".hero-title", { y: 40, opacity: 0, duration: 1 })
-        .from(".hero-highlight", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
-        .from(".hero-actions", { y: 20, opacity: 0, duration: 0.6 }, "-=0.3")
-        .from(".hero-metric", { y: 20, opacity: 0, stagger: 0.08, duration: 0.6 }, "-=0.2");
+  // Duck mechanics
+  const duckOriginRef = useRef<{ x: number; y: number } | null>(null);
+  const duckIntervalRef = useRef<number | null>(null);
+  const duckStaticRef = useRef<HTMLDivElement | null>(null); // place in title
+  const duckFloatingRef = useRef<HTMLDivElement | null>(null); // absolute overlay
+  const duckRef = useRef<HTMLDivElement | null>(null);
+  const [isDuckRunning, setDuckRunning] = useState(false);
 
-      gsap.utils.toArray<HTMLElement>(".hero-floating").forEach((el, idx) => {
-        gsap.to(el, {
-          yPercent: idx % 2 === 0 ? 8 : -6,
-          xPercent: idx % 2 === 0 ? -6 : 6,
-          duration: 6,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
+  const clearDuckInterval = () => {
+    if (duckIntervalRef.current) {
+      window.clearInterval(duckIntervalRef.current);
+      duckIntervalRef.current = null;
+    }
+  };
+
+  const moveDuckRandomly = () => {
+    if (!scope.current || !duckRef.current) return;
+
+    const containerRect = scope.current.getBoundingClientRect();
+    const duckRect = duckRef.current.getBoundingClientRect();
+
+    const maxX = containerRect.width - duckRect.width;
+    const maxY = containerRect.height - duckRect.height;
+
+    const targetX = Math.random() * maxX;
+    const targetY = Math.random() * maxY;
+
+    gsap.to(duckRef.current, {
+      left: `${targetX}px`,
+      top: `${targetY}px`,
+      duration: 0.8,
+      ease: "power2.inOut",
+    });
+  };
+
+  const startDuckRun = () => {
+    if (isDuckRunning) return;
+    setDuckRunning(true);
+
+    if (duckFloatingRef.current && duckRef.current) {
+      duckFloatingRef.current.appendChild(duckRef.current);
+
+      gsap.killTweensOf(duckRef.current);
+      duckRef.current.style.transform = "none";
+
+      duckRef.current.style.position = "absolute";
+      duckRef.current.style.zIndex = "70";
+      duckRef.current.style.left = "0px";
+      duckRef.current.style.top = "0px";
+    }
+
+    moveDuckRandomly();
+    duckIntervalRef.current = window.setInterval(moveDuckRandomly, 900);
+  };
+
+  const stopDuckRun = () => {
+    clearDuckInterval();
+    setDuckRunning(false);
+
+    if (!duckRef.current || !duckStaticRef.current) return;
+
+    // 1) Убиваем ВСЕ GSAP-анимации
+    gsap.killTweensOf(duckRef.current);
+
+    // 2) Сбрасываем gsap internal transform state
+    gsap.set(duckRef.current, { clearProps: "all" });
+
+    // 3) Сбрасываем CSS-позиционирование
+    duckRef.current.style.position = "relative";
+    duckRef.current.style.left = "0px";
+    duckRef.current.style.top = "0px";
+    duckRef.current.style.transform = "none";
+    duckRef.current.style.zIndex = "auto";
+
+    // 4) Удаляем origin, чтобы новое движение началось корректно
+    duckOriginRef.current = null;
+
+    // 5) Возвращаем утку обратно
+    duckStaticRef.current.appendChild(duckRef.current);
+  };
+
+  const handleDuckClick = () => {
+    isDuckRunning ? stopDuckRun() : startDuckRun();
+  };
+
+  // Animations
+  useGSAP(
+      () => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(".hero-title", { y: 40, opacity: 0, duration: 1 })
+            .from(".hero-highlight", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
+            .from(".hero-actions", { y: 20, opacity: 0, duration: 0.6 }, "-=0.3")
+            .from(".hero-metric", { y: 20, opacity: 0, stagger: 0.08, duration: 0.6 }, "-=0.2");
+
+        gsap.utils.toArray<HTMLElement>(".hero-floating").forEach((el, idx) => {
+          gsap.to(el, {
+            yPercent: idx % 2 === 0 ? 8 : -6,
+            xPercent: idx % 2 === 0 ? -6 : 6,
+            duration: 6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
         });
-      });
-    },
-    { scope }
+      },
+      { scope }
   );
 
-  return (
-    <section ref={scope} className="relative overflow-hidden pb-24 pt-12 sm:pt-16 lg:pt-24">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="glow hero-floating left-[12%] top-10 h-64 w-64 rounded-full bg-yellow-300/30" />
-        <div className="glow hero-floating right-[16%] top-20 h-72 w-72 rounded-full bg-amber-200/40" />
-      </div>
+  useEffect(() => {
+    return () => clearDuckInterval();
+  }, []);
 
-      <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6">
-        <div className="flex items-center justify-between gap-6">
-          <Badge variant="outline" className="border-yellow-400/60 bg-yellow-200/40 text-yellow-900">
-            Доступен для заказов
-          </Badge>
-          <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
-            <Sparkles className="h-4 w-4 text-primary" />
-            Сайты / Приложения / Прочее
-          </div>
+  return (
+      <section ref={scope} className="relative overflow-hidden pb-24 pt-12 sm:pt-16 lg:pt-24">
+        <div ref={duckFloatingRef} className="absolute inset-0 z-30 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="glow hero-floating left-[12%] top-10 h-10 w-10 bg-yellow-300/30" />
+          <div className="glow hero-floating right-[16%] top-20 h-12 w-12 bg-amber-200/40" />
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
-          <div className="space-y-6">
-            <div className="flex">
-              <div className="relative">
-                <Image src={"/logo.png"} alt="Arcforgelab logo" width={90} height={90} />
-              </div>
-              <div className="hero-title relative inline-block text-balance text-4xl leading-tight sm:text-5xl lg:text-6xl">
-                Arcforgelab
-              </div>
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 z-10">
+          <div className="flex items-center justify-between gap-6">
+            <Badge variant="outline" className="border-yellow-400/60 bg-yellow-200/40 text-yellow-900">
+              Доступен для заказов
+            </Badge>
+            <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
+              <Sparkles className="h-4 w-4 text-primary" />
+              Сайты / Приложения / Прочее
             </div>
+          </div>
+
+          <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+            <div className="space-y-6">
+              <div className="relative flex items-center gap-4">
+                <div ref={duckStaticRef} className="cursor-pointer select-none">
+                  <div
+                      ref={duckRef}
+                      className="pointer-events-auto"   // <-- ключевой момент
+                      onClick={handleDuckClick}
+                  >
+                    <Image
+                        src={"/logo.png"}
+                        alt="Arcforgelab duck"
+                        width={90}
+                        height={90}
+                        draggable={false}
+                    />
+                  </div>
+                </div>
+                <div className="hero-title inline-block text-4xl sm:text-5xl lg:text-6xl">
+                  Arcforgelab
+                </div>
+              </div>
 
             <div className="hero-highlight space-y-3 text-lg text-muted-foreground sm:text-xl">
               {highlight.map((line) => (
