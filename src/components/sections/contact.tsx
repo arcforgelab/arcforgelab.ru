@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,6 +8,7 @@ import { Loader2, SendHorizontal } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -17,18 +18,28 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { useI18n } from "@/lib/i18n";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Enter a valid email"),
-  project: z.string().min(10, "Add a few lines about the work"),
-});
-
-type FormValues = z.infer<typeof schema>;
+type FormValues = {
+  name: string;
+  email: string;
+  project: string;
+};
 
 export function ContactSection() {
+  const { t } = useI18n();
+  const schema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, t.contact.validation.name),
+        email: z.string().email(t.contact.validation.email),
+        project: z.string().min(10, t.contact.validation.project),
+      }),
+    [t.contact.validation.email, t.contact.validation.name, t.contact.validation.project]
+  );
+
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", email: "", project: "" },
@@ -47,13 +58,13 @@ export function ContactSection() {
 
   const onSubmit = async (values: FormValues) => {
     setStatus("sending");
-    toast("Отправка...", {
-      description: `Спасибо, ${values.name}. Я свяжусь с вами в ближайшее время.`,
+    toast(t.contact.toast.sendingTitle, {
+      description: t.contact.toast.sendingDescription(values.name),
     });
     await new Promise((resolve) => setTimeout(resolve, 1400));
     setStatus("sent");
-    toast.success("Отправлено!", {
-      description: `Я отвечу на ваш email: ${values.email}`,
+    toast.success(t.contact.toast.successTitle, {
+      description: t.contact.toast.successDescription(values.email),
     });
     form.reset();
     setTimeout(() => setStatus("idle"), 1500);
@@ -66,17 +77,17 @@ export function ContactSection() {
         <div className="relative grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
             <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary">
-              Связаться со мной
+              {t.contact.eyebrow}
             </Badge>
-            <h2 className="text-3xl font-semibold sm:text-4xl">Расскажите о вашем проекте.</h2>
-            <p className="text-muted-foreground">
-              Работаю как индивидуальный разработчик: backend, frontend, интеграции, DevOps, архитектура, оптимизация производительности, системный дизайн. Без дизайна — только инженерия, API, сервисы и инфраструктура, которые реально работают и выдерживают нагрузку.
-            </p>
+            <h2 className="text-3xl font-semibold sm:text-4xl">{t.contact.title}</h2>
+            <p className="text-muted-foreground">{t.contact.description}</p>
             <Separator className="bg-white/10" />
             <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-              <Badge variant="secondary" className="bg-secondary/70">Проектирование и разработка API</Badge>
-              <Badge variant="secondary" className="bg-secondary/70">Укрепление и ускорение существующих систем</Badge>
-              <Badge variant="secondary" className="bg-secondary/70">Инфраструктура, CI/CD и наблюдаемость</Badge>
+              {t.contact.badges.map((badge) => (
+                <Badge key={badge} variant="secondary" className="bg-secondary/70">
+                  {badge}
+                </Badge>
+              ))}
             </div>
           </div>
 
@@ -87,9 +98,9 @@ export function ContactSection() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Имя</FormLabel>
+                    <FormLabel>{t.contact.form.nameLabel}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Как к вам обращаться?" {...field} />
+                      <Input placeholder={t.contact.form.namePlaceholder} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,9 +111,9 @@ export function ContactSection() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Почта</FormLabel>
+                    <FormLabel>{t.contact.form.emailLabel}</FormLabel>
                     <FormControl>
-                      <Input placeholder="you@company.com" type="email" {...field} />
+                      <Input placeholder={t.contact.form.emailPlaceholder} type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -113,10 +124,10 @@ export function ContactSection() {
                 name="project"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Потребности / Проект</FormLabel>
+                    <FormLabel>{t.contact.form.projectLabel}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Опишите задачу: что нужно сделать?"
+                        placeholder={t.contact.form.projectPlaceholder}
                         className="min-h-[140px]"
                         {...field}
                       />
@@ -134,11 +145,11 @@ export function ContactSection() {
                 {status === "sending" ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Отправка...
+                    {t.contact.form.submitting}
                   </>
                 ) : (
                   <>
-                    Отправить
+                    {t.contact.form.submit}
                     <SendHorizontal className="ml-2 h-4 w-4" />
                   </>
                 )}

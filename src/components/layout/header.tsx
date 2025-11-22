@@ -2,23 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 
-const navItems = [
-  { label: "Главная", href: "/" },
-  { label: "Навыки", href: "/#skills" },
-  { label: "Услуги", href: "/#services" },
-  { label: "Работы", href: "/work" },
-  { label: "Клиенты", href: "/#clients" },
-  { label: "Контакты", href: "/#contact" },
-];
+import { LanguageToggle } from "@/components/language-toggle";
+import { useI18n } from "@/lib/i18n";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -41,22 +36,20 @@ export function Header() {
           </div>
           <div>
             <p className="text-sm font-semibold">Arcforgelab</p>
-            <p className="text-xs text-muted-foreground">Fullstack-разработчик</p>
+            <p className="text-xs text-muted-foreground">{t.common.role}</p>
           </div>
         </Link>
         <nav className="hidden items-center gap-3 md:flex">
-          {navItems.map((item) => (
+          {t.common.nav.map((item) => (
             <Link key={item.href} href={item.href} className="text-sm text-muted-foreground hover:text-foreground">
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="hidden items-center gap-3 md:flex">
-          <Badge variant="outline" className="border-primary/40 bg-primary/10 text-primary">
-            Работа в команде/одиночка
-          </Badge>
+          <LanguageToggle />
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/80" asChild>
-            <Link href="#contact">Начать проект</Link>
+            <Link href="#contact">{t.common.contactCta}</Link>
           </Button>
         </div>
 
@@ -68,15 +61,14 @@ export function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="border-border bg-background/95">
-            <SheetTitle className="sr-only">Меню</SheetTitle>
-            <SheetDescription className="sr-only">
-              Панель навигации
-            </SheetDescription>
+            <SheetTitle className="sr-only">Navigation</SheetTitle>
+            <SheetDescription className="sr-only">Mobile navigation</SheetDescription>
             <div className="mb-4 flex items-center justify-between">
               <p className="font-semibold">Arcforgelab</p>
+              <LanguageToggle />
             </div>
             <div className="flex flex-col space-y-3">
-              {navItems.map((item) => (
+              {t.common.nav.map((item) => (
                 <SheetClose key={item.href} asChild>
                   <Link href={item.href} className="text-muted-foreground hover:text-foreground">
                     {item.label}
@@ -85,7 +77,7 @@ export function Header() {
               ))}
               <SheetClose asChild>
                 <Button className="bg-primary text-primary-foreground hover:bg-primary/80" asChild>
-                  <Link href="/#contact">Начать проект</Link>
+                  <Link href="/#contact">{t.common.contactCta}</Link>
                 </Button>
               </SheetClose>
             </div>

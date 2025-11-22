@@ -5,18 +5,17 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Filter, Search, X } from "lucide-react";
-import {
-  portfolioItems,
-  type PortfolioItem,
-} from "@/data/content";
+import { ArrowUpRight, Filter, Search } from "lucide-react";
+
+import { type LocalizedPortfolioItem } from "@/data/i18n";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import {ScreensSlider} from "@/components/ui/screen-slider";
+import { ScreensSlider } from "@/components/ui/screen-slider";
+import { useI18n } from "@/lib/i18n";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,27 +26,60 @@ type FilterState = {
   search: string;
 };
 
+type FilterOption = { value: string; label: string };
+
 const unique = (arr: string[]) => Array.from(new Set(arr));
+const ANY_VALUE = "__any__";
 
 export default function WorkPage() {
-  const [filters, setFilters] = useState<FilterState>({
-    role: "Все",
-    type: "Все",
-    tech: "Все",
+  const { t, language } = useI18n();
+  const any = t.work.filters.any;
+  const items = t.portfolio.items;
+
+  const [filters, setFilters] = useState<FilterState>(() => ({
+    role: ANY_VALUE,
+    type: ANY_VALUE,
+    tech: ANY_VALUE,
     search: "",
-  });
-  const [selected, setSelected] = useState<PortfolioItem | null>(null);
-  const [slide, setSlide] = useState(0);
+  }));
+  const [selected, setSelected] = useState<LocalizedPortfolioItem | null>(null);
 
-  const roles = useMemo(() => ["Все", ...unique(portfolioItems.map((item) => item.role))], []);
-  const types = useMemo(() => ["Все", ...unique(portfolioItems.map((item) => item.type))], []);
-  const techs = useMemo(() => ["Все", ...unique(portfolioItems.flatMap((item) => item.tech))], []);
+  const roleOptions: FilterOption[] = useMemo(() => {
+    const values = unique(items.map((item) => item.role.en));
+    return [
+      { value: ANY_VALUE, label: any },
+      ...values.map((value) => ({
+        value,
+        label: items.find((item) => item.role.en === value)?.role[language] ?? value,
+      })),
+    ];
+  }, [any, items, language]);
 
-  const filtered = portfolioItems.filter((item) => {
-    const roleMatch = filters.role === "Все" || item.role === filters.role;
-    const typeMatch = filters.type === "Все" || item.type === filters.type;
-    const techMatch = filters.tech === "Все" || item.tech.includes(filters.tech);
-    const searchText = `${item.title} ${item.description} ${item.longDescription} ${item.tech.join(" ")} ${item.stack.join(" ")}`.toLowerCase();
+  const typeOptions: FilterOption[] = useMemo(() => {
+    const values = unique(items.map((item) => item.type.en));
+    return [
+      { value: ANY_VALUE, label: any },
+      ...values.map((value) => ({
+        value,
+        label: items.find((item) => item.type.en === value)?.type[language] ?? value,
+      })),
+    ];
+  }, [any, items, language]);
+
+  const techOptions: FilterOption[] = useMemo(() => {
+    const values = unique(items.flatMap((item) => item.tech));
+    return [
+      { value: ANY_VALUE, label: any },
+      ...values.map((value) => ({ value, label: value })),
+    ];
+  }, [any, items]);
+
+  const filtered = items.filter((item) => {
+    const searchText = `${item.title[language]} ${item.description[language]} ${item.longDescription[language]} ${item.tech.join(" ")} ${item.stack.join(" ")}`.toLowerCase();
+
+    const roleMatch = filters.role === ANY_VALUE || item.role.en === filters.role;
+    const typeMatch = filters.type === ANY_VALUE || item.type.en === filters.type;
+    const techMatch = filters.tech === ANY_VALUE || item.tech.includes(filters.tech);
     const searchMatch = searchText.includes(filters.search.toLowerCase());
     return roleMatch && typeMatch && techMatch && searchMatch;
   });
@@ -67,32 +99,17 @@ export default function WorkPage() {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
-  const openDetails = (item: PortfolioItem) => {
-    setSelected(item);
-    setSlide(0);
-  };
-
-  const nextSlide = () => {
-    if (!selected) return;
-    setSlide((prev) => (prev + 1) % selected.screens.length);
-  };
-
-  const prevSlide = () => {
-    if (!selected) return;
-    setSlide((prev) => (prev - 1 + selected.screens.length) % selected.screens.length);
-  };
-
   return (
     <div className="relative min-h-screen bg-background">
       <div className="grid-overlay" />
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 pb-20 pt-24">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
-            <p className="text-sm uppercase tracking-[0.3em] text-primary/90">Работы</p>
-            <h1 className="text-3xl font-semibold sm:text-4xl">Проекты, в котором я участвовал в разработке.</h1>
+            <p className="text-sm uppercase tracking-[0.3em] text-primary/90">{t.work.eyebrow}</p>
+            <h1 className="text-3xl font-semibold sm:text-4xl">{t.work.title}</h1>
           </div>
           <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
-            <Link href="/">Вернуть на главную</Link>
+            <Link href="/">{t.work.backLink}</Link>
           </Button>
         </div>
 
@@ -101,8 +118,8 @@ export default function WorkPage() {
             <div className="flex flex-1 items-center gap-2 rounded-lg border border-border bg-white/70 px-3 py-2">
               <Search className="h-4 w-4 text-muted-foreground" />
               <Input
-                aria-label="Поиск проектов"
-                placeholder="Фильтрация по стеку, домену и технологиям"
+                aria-label={t.work.searchPlaceholder}
+                placeholder={t.work.searchPlaceholder}
                 className="border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
                 value={filters.search}
                 onChange={(e) => setFilter("search", e.target.value)}
@@ -110,26 +127,26 @@ export default function WorkPage() {
             </div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
               <Filter className="h-4 w-4" />
-              Параметры фильтрации
+              {t.work.filterLabel}
             </div>
           </div>
           <Separator className="my-4 bg-black/5" />
           <div className="flex flex-col gap-4">
             <FilterGroup
-              label="Роль"
-              options={roles}
+              label={t.work.filters.role}
+              options={roleOptions}
               active={filters.role}
               onChange={(val) => setFilter("role", val)}
             />
             <FilterGroup
-              label="Тип проекта"
-              options={types}
+              label={t.work.filters.type}
+              options={typeOptions}
               active={filters.type}
               onChange={(val) => setFilter("type", val)}
             />
             <FilterGroup
-              label="Технологии"
-              options={techs}
+              label={t.work.filters.tech}
+              options={techOptions}
               active={filters.tech}
               onChange={(val) => setFilter("tech", val)}
             />
@@ -146,14 +163,14 @@ export default function WorkPage() {
               <div className="relative flex flex-col gap-4">
                 <div className="flex items-center justify-between gap-2">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{item.type}</p>
-                    <h3 className="text-xl font-semibold">{item.title}</h3>
+                    <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{item.type[language]}</p>
+                    <h3 className="text-xl font-semibold">{item.title[language]}</h3>
                   </div>
                   <Badge variant="outline" className="border-black/5 bg-white/80 text-xs">
                     {item.year}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
+                <p className="text-sm text-muted-foreground">{item.description[language]}</p>
                 <div className="flex flex-wrap gap-2">
                   {item.tech.map((tech) => (
                     <Badge key={tech} variant="secondary" className="bg-secondary/70 text-xs">
@@ -163,17 +180,17 @@ export default function WorkPage() {
                 </div>
                 <div className="flex items-center justify-between pt-2">
                   <Badge variant="outline" className="border-primary/30 bg-primary/10 text-xs text-primary">
-                    {item.role}
+                    {item.role[language]}
                   </Badge>
                   <div className="flex items-center gap-3">
                     <Button variant="ghost" className="px-0 text-primary hover:text-primary" asChild>
                       <Link href={item.link} target="_blank">
-                        Подробнее
+                        {t.work.caseLink}
                         <ArrowUpRight className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>
-                    <Button variant="secondary" size="sm" onClick={() => openDetails(item)}>
-                      Детали
+                    <Button variant="secondary" size="sm" onClick={() => setSelected(item)}>
+                      {t.work.viewDetails}
                     </Button>
                   </div>
                 </div>
@@ -187,21 +204,23 @@ export default function WorkPage() {
         <SheetContent className="w-full overflow-y-auto border-border bg-background sm:max-w-3xl">
           <SheetHeader className="flex flex-row items-start justify-between gap-4">
             <div className="space-y-1">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{selected?.type}</p>
-              <SheetTitle className="text-2xl">{selected?.title}</SheetTitle>
+              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{selected?.type[language]}</p>
+              <SheetTitle className="text-2xl">{selected?.title[language]}</SheetTitle>
               {selected ? (
                 <Badge variant="outline" className="border-primary/30 bg-primary/10 text-xs text-primary">
-                  {selected.role}
+                  {selected.role[language]}
                 </Badge>
               ) : null}
             </div>
           </SheetHeader>
           {selected && (
             <div className="mt-6 space-y-4">
-              <p className="text-muted-foreground">{selected.longDescription}</p>
+              <p className="text-muted-foreground">{selected.longDescription[language]}</p>
               <Separator className="bg-black/5" />
               <div className="space-y-2">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Stack</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  {t.work.stackLabel}
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {selected.stack.map((item) => (
                     <Badge key={item} variant="secondary" className="bg-secondary/70 text-xs">
@@ -213,28 +232,22 @@ export default function WorkPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                    Скриншоты
+                    {t.work.galleryLabel}
                   </h3>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="icon" onClick={prevSlide}>
-                      <ArrowLeft className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon" onClick={nextSlide}>
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </div>
                 </div>
                 <div className="relative overflow-hidden rounded-xl border border-border bg-secondary/60 p-4">
-                  <ScreensSlider screens={selected.screens} />
+                  <ScreensSlider
+                    screens={selected.screens.map((screen) => ({
+                      ...screen,
+                      title: screen.title[language],
+                    }))}
+                  />
                   <div className="h-48 sm:h-56" />
                 </div>
               </div>
-              <Button
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/80"
-                asChild
-              >
+              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/80" asChild>
                 <Link href={selected.link} target="_blank">
-                  Открыть проект
+                  {t.work.openCase}
                   <ArrowUpRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -248,7 +261,7 @@ export default function WorkPage() {
 
 type FilterGroupProps = {
   label: string;
-  options: string[];
+  options: FilterOption[];
   active: string;
   onChange: (value: string) => void;
 };
@@ -258,16 +271,19 @@ function FilterGroup({ label, options, active, onChange }: FilterGroupProps) {
     <div className="space-y-2">
       <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{label}</p>
       <div className="flex flex-wrap gap-2">
-        {options.map((opt) => (
-          <Badge
-            key={opt}
-            variant={active === opt ? "default" : "secondary"}
-            onClick={() => onChange(opt)}
-            className={`cursor-pointer ${active === opt ? "bg-primary text-primary-foreground" : "bg-secondary/70"}`}
-          >
-            {opt}
-          </Badge>
-        ))}
+        {options.map((opt) => {
+          const isActive = active === opt.value;
+          return (
+            <Badge
+              key={opt.value}
+              variant={isActive ? "default" : "secondary"}
+              onClick={() => onChange(opt.value)}
+              className={`cursor-pointer ${isActive ? "bg-primary text-primary-foreground" : "bg-secondary/70"}`}
+            >
+              {opt.label}
+            </Badge>
+          );
+        })}
       </div>
     </div>
   );
