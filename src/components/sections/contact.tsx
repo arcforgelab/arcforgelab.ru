@@ -16,14 +16,14 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Toaster } from "@/components/ui/sonner";
-import {toast} from "sonner";
+import { toast } from "sonner";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const schema = z.object({
-  name: z.string().min(2, "Укажите имя"),
-  email: z.string().email("Введите корректный email"),
-  project: z.string().min(10, "Опишите задачу подробнее"),
+  name: z.string().min(2, "Name is required"),
+  email: z.string().email("Enter a valid email"),
+  project: z.string().min(10, "Add a few lines about the work"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -47,13 +47,13 @@ export function ContactSection() {
 
   const onSubmit = async (values: FormValues) => {
     setStatus("sending");
-    toast("Отправляем...", {
-      description: `Упаковываем заявку ${values.name} вместе с анимациями.`,
+    toast("Отправка...", {
+      description: `Спасибо, ${values.name}. Я свяжусь с вами в ближайшее время.`,
     });
     await new Promise((resolve) => setTimeout(resolve, 1400));
     setStatus("sent");
-    toast.success("Получили!", {
-      description: `Ответим на ${values.email} в течение одного рабочего дня.`,
+    toast.success("Отправлено!", {
+      description: `Я отвечу на ваш email: ${values.email}`,
     });
     form.reset();
     setTimeout(() => setStatus("idle"), 1500);
@@ -66,17 +66,17 @@ export function ContactSection() {
         <div className="relative grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
             <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary">
-              Обсудим задачу
+              Связаться со мной
             </Badge>
-            <h2 className="text-3xl font-semibold sm:text-4xl">Расскажите о продукте.</h2>
+            <h2 className="text-3xl font-semibold sm:text-4xl">Расскажите о вашем проекте.</h2>
             <p className="text-muted-foreground">
-              Прототип или платформа — соберём UI на shadcn/ui, анимации на GSAP и надёжный бэкенд с DevOps‑практиками.
+              Работаю как индивидуальный разработчик: backend, frontend, интеграции, DevOps, архитектура, оптимизация производительности, системный дизайн. Без дизайна — только инженерия, API, сервисы и инфраструктура, которые реально работают и выдерживают нагрузку.
             </p>
             <Separator className="bg-white/10" />
             <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-              <Badge variant="secondary" className="bg-secondary/70">Созвон → Архитектура → Спринты</Badge>
-              <Badge variant="secondary" className="bg-secondary/70">Анимации и микро-интеракции входят</Badge>
-              <Badge variant="secondary" className="bg-secondary/70">Еженедельные демо и метрики</Badge>
+              <Badge variant="secondary" className="bg-secondary/70">Проектирование и разработка API</Badge>
+              <Badge variant="secondary" className="bg-secondary/70">Укрепление и ускорение существующих систем</Badge>
+              <Badge variant="secondary" className="bg-secondary/70">Инфраструктура, CI/CD и наблюдаемость</Badge>
             </div>
           </div>
 
@@ -87,9 +87,9 @@ export function ContactSection() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Имя</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ада Лавлейс" {...field} />
+                      <Input placeholder="Как к вам обращаться?" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -102,7 +102,7 @@ export function ContactSection() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="you@product.com" type="email" {...field} />
+                      <Input placeholder="you@company.com" type="email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -113,10 +113,10 @@ export function ContactSection() {
                 name="project"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Коротко о проекте</FormLabel>
+                    <FormLabel>Project / need</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Что делаем? Сроки? Ключевые результаты?"
+                        placeholder="Опишите задачу: что нужно сделать?"
                         className="min-h-[140px]"
                         {...field}
                       />
@@ -134,11 +134,11 @@ export function ContactSection() {
                 {status === "sending" ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Sending
+                    Отправка...
                   </>
                 ) : (
                   <>
-                    Отправить заявку
+                    Отправить
                     <SendHorizontal className="ml-2 h-4 w-4" />
                   </>
                 )}

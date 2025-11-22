@@ -13,22 +13,22 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arcforgelab — фулстек разработчик",
+  title: "Arcforgelab - backend engineer for APIs and platforms",
   description:
-    "Минималистичный портфолио-сайт фулстек разработчика: shadcn/ui, shadcnblocks, GSAP-анимации и продакшен-архитектура.",
-  metadataBase: new URL("https://arcforgelab.com"),
+    "Solo backend and platform engineering: APIs, data pipelines, auth, billing, observability, and reliable releases for product teams.",
+  metadataBase: new URL("https://arcforgelab.ru"),
   openGraph: {
-    title: "Arcforgelab — фулстек разработчик",
+    title: "Arcforgelab - backend engineer for APIs and platforms",
     description:
-      "Минималистичный портфолио-сайт фулстек разработчика: shadcn/ui, shadcnblocks, GSAP-анимации и продакшен-архитектура.",
-    url: "https://arcforgelab.com",
+      "Solo backend and platform engineering: APIs, data pipelines, auth, billing, observability, and reliable releases for product teams.",
+    url: "https://arcforgelab.ru",
     siteName: "Arcforgelab",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arcforgelab — фулстек разработчик",
+    title: "Arcforgelab - backend engineer for APIs and platforms",
     description:
-      "Минималистичный портфолио-сайт фулстек разработчика: shadcn/ui, shadcnblocks, GSAP-анимации и продакшен-архитектура.",
+      "Solo backend and platform engineering: APIs, data pipelines, auth, billing, observability, and reliable releases for product teams.",
   },
 };
 

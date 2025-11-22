@@ -11,18 +11,19 @@ import { socialLinks } from "@/data/content";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const highlight = [
-  "Фулстек-разработчик, который соединяет минималистичный UI с живой анимацией.",
-  "Работаю на shadcn/ui + shadcnblocks, анимация через GSAP и ScrollTrigger.",
+  "Ведущий разработчик с 8-летним опытом в IT.",
+  "Быстро подстраиваюсь под темп работы, поддерживаю атмосферу в коллективе, уважаю и соблюдаю ценности компании",
 ];
 
 const metrics = [
-  { label: "Запусков в прод", value: "35+" },
-  { label: "Средний perf score", value: "98" },
-  { label: "Опыт", value: "SaaS · E-com · XR · Data Viz" },
+  { label: "сервисов в обслуживании", value: "50+" },
+  { label: "Среднее время работы пайплайна", value: "1,3мин" },
+  { label: "Среднее время SLA", value: "99,9%" },
 ];
 
 export function HeroSection() {
@@ -60,18 +61,23 @@ export function HeroSection() {
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6">
         <div className="flex items-center justify-between gap-6">
           <Badge variant="outline" className="border-yellow-400/60 bg-yellow-200/40 text-yellow-900">
-            Доступен для избранных проектов
+            Доступен для заказов
           </Badge>
           <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
             <Sparkles className="h-4 w-4 text-primary" />
-            motion + системная инженерия
+            Сайты / Приложения / Прочее
           </div>
         </div>
 
         <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
           <div className="space-y-6">
-            <div className="hero-title relative inline-block text-balance text-4xl leading-tight sm:text-5xl lg:text-6xl">
-              Arcforgelab
+            <div className="flex">
+              <div className="relative">
+                <Image src={"/logo.png"} alt="Arcforgelab logo" width={90} height={90} />
+              </div>
+              <div className="hero-title relative inline-block text-balance text-4xl leading-tight sm:text-5xl lg:text-6xl">
+                Arcforgelab
+              </div>
             </div>
 
             <div className="hero-highlight space-y-3 text-lg text-muted-foreground sm:text-xl">
@@ -83,7 +89,7 @@ export function HeroSection() {
             <div className="hero-actions flex flex-wrap items-center gap-4">
               <Button size="lg" className="group bg-primary text-primary-foreground hover:bg-primary/80" asChild>
                 <Link href="/work">
-                  Смотреть все проекты
+                  Посмотреть мои работы
                   <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </Link>
               </Button>
@@ -106,10 +112,9 @@ export function HeroSection() {
           <Card className="floating-card relative overflow-hidden border-primary/30 bg-gradient-to-br from-white via-secondary to-amber-50 p-6 shadow-xl">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(248,211,58,0.2),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(255,226,119,0.28),transparent_34%)]" />
             <div className="relative space-y-6">
-              <p className="text-sm uppercase tracking-[0.25em] text-primary/90">Что делаем</p>
+              <p className="text-sm uppercase tracking-[0.25em] text-primary/90">Что я делаю?</p>
               <p className="text-lg text-muted-foreground">
-                Проектируем минималистичный интерфейс с акцентом на движение. Собираем бэкенд и DevOps, чтобы релизы
-                оставались стабильными, а UI — живым за счёт GSAP и ScrollTrigger.
+                Проектирую API, базы данных и сервисы, настраиваю окружения и обеспечиваю стабильную работу backend-систем. Забочусь о скорости, безопасности и предсказуемости продукта.
               </p>
               <div className="grid gap-3 sm:grid-cols-3">
                 {metrics.map((metric) => (

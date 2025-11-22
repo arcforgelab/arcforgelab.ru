@@ -39,12 +39,12 @@ export function PortfolioSection() {
     <section ref={scope} id="work" className="mx-auto max-w-6xl px-6 pb-20">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div className="space-y-2">
-          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Избранное</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">Проекты, которыми гордимся.</h2>
+          <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Работы</p>
+          <h2 className="text-3xl font-semibold sm:text-4xl">Проекты, в котором я участвовал в разработке.</h2>
         </div>
         <Button variant="secondary" className="border border-border/70 bg-secondary/70" asChild>
           <Link href="/work">
-            Смотреть все
+            Изучить все
             <ArrowUpRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
@@ -81,7 +81,7 @@ export function PortfolioSection() {
                   {item.role}
                 </Badge>
                 <Link href={item.link} target="_blank" className="inline-flex items-center text-primary hover:underline">
-                  Перейти на сайт
+                  Открыть кейс
                   <ArrowUpRight className="ml-1 h-4 w-4" />
                 </Link>
               </div>

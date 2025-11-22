@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {ScreensSlider} from "@/components/ui/screen-slider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,22 +31,22 @@ const unique = (arr: string[]) => Array.from(new Set(arr));
 
 export default function WorkPage() {
   const [filters, setFilters] = useState<FilterState>({
-    role: "все",
-    type: "все",
-    tech: "все",
+    role: "Все",
+    type: "Все",
+    tech: "Все",
     search: "",
   });
   const [selected, setSelected] = useState<PortfolioItem | null>(null);
   const [slide, setSlide] = useState(0);
 
-  const roles = useMemo(() => ["все", ...unique(portfolioItems.map((item) => item.role))], []);
-  const types = useMemo(() => ["все", ...unique(portfolioItems.map((item) => item.type))], []);
-  const techs = useMemo(() => ["все", ...unique(portfolioItems.flatMap((item) => item.tech))], []);
+  const roles = useMemo(() => ["Все", ...unique(portfolioItems.map((item) => item.role))], []);
+  const types = useMemo(() => ["Все", ...unique(portfolioItems.map((item) => item.type))], []);
+  const techs = useMemo(() => ["Все", ...unique(portfolioItems.flatMap((item) => item.tech))], []);
 
   const filtered = portfolioItems.filter((item) => {
-    const roleMatch = filters.role === "все" || item.role === filters.role;
-    const typeMatch = filters.type === "все" || item.type === filters.type;
-    const techMatch = filters.tech === "все" || item.tech.includes(filters.tech);
+    const roleMatch = filters.role === "Все" || item.role === filters.role;
+    const typeMatch = filters.type === "Все" || item.type === filters.type;
+    const techMatch = filters.tech === "Все" || item.tech.includes(filters.tech);
     const searchText = `${item.title} ${item.description} ${item.longDescription} ${item.tech.join(" ")} ${item.stack.join(" ")}`.toLowerCase();
     const searchMatch = searchText.includes(filters.search.toLowerCase());
     return roleMatch && typeMatch && techMatch && searchMatch;
@@ -87,11 +88,11 @@ export default function WorkPage() {
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 pb-20 pt-24">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1">
-            <p className="text-sm uppercase tracking-[0.3em] text-primary/90">Все проекты</p>
-            <h1 className="text-3xl font-semibold sm:text-4xl">Каталог работ с фильтрами и поиском.</h1>
+            <p className="text-sm uppercase tracking-[0.3em] text-primary/90">Работы</p>
+            <h1 className="text-3xl font-semibold sm:text-4xl">Проекты, в котором я участвовал в разработке.</h1>
           </div>
           <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
-            <Link href="/">На главную</Link>
+            <Link href="/">Вернуть на главную</Link>
           </Button>
         </div>
 
@@ -100,8 +101,8 @@ export default function WorkPage() {
             <div className="flex flex-1 items-center gap-2 rounded-lg border border-border bg-white/70 px-3 py-2">
               <Search className="h-4 w-4 text-muted-foreground" />
               <Input
-                aria-label="Поиск по проектам"
-                placeholder="Поиск по названию, стеку или описанию"
+                aria-label="Поиск проектов"
+                placeholder="Фильтрация по стеку, домену и технологиям"
                 className="border-0 bg-transparent px-0 shadow-none focus-visible:ring-0"
                 value={filters.search}
                 onChange={(e) => setFilter("search", e.target.value)}
@@ -109,7 +110,7 @@ export default function WorkPage() {
             </div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-muted-foreground">
               <Filter className="h-4 w-4" />
-              Быстрая фильтрация
+              Параметры фильтрации
             </div>
           </div>
           <Separator className="my-4 bg-black/5" />
@@ -167,12 +168,12 @@ export default function WorkPage() {
                   <div className="flex items-center gap-3">
                     <Button variant="ghost" className="px-0 text-primary hover:text-primary" asChild>
                       <Link href={item.link} target="_blank">
-                        Сайт
+                        Подробнее
                         <ArrowUpRight className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>
                     <Button variant="secondary" size="sm" onClick={() => openDetails(item)}>
-                      Подробнее
+                      Детали
                     </Button>
                   </div>
                 </div>
@@ -194,16 +195,13 @@ export default function WorkPage() {
                 </Badge>
               ) : null}
             </div>
-            <Button variant="ghost" size="icon" onClick={() => setSelected(null)}>
-              <X className="h-5 w-5" />
-            </Button>
           </SheetHeader>
           {selected && (
             <div className="mt-6 space-y-4">
               <p className="text-muted-foreground">{selected.longDescription}</p>
               <Separator className="bg-black/5" />
               <div className="space-y-2">
-                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Стек</h3>
+                <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">Stack</h3>
                 <div className="flex flex-wrap gap-2">
                   {selected.stack.map((item) => (
                     <Badge key={item} variant="secondary" className="bg-secondary/70 text-xs">
@@ -227,21 +225,7 @@ export default function WorkPage() {
                   </div>
                 </div>
                 <div className="relative overflow-hidden rounded-xl border border-border bg-secondary/60 p-4">
-                  {selected.screens.map((screen, idx) => (
-                    <div
-                      key={screen.title}
-                      className={`absolute inset-0 rounded-lg bg-gradient-to-br ${screen.bg} p-4 transition-all duration-500 ${
-                        idx === slide ? "opacity-100 translate-y-0" : "pointer-events-none translate-y-4 opacity-0"
-                      }`}
-                    >
-                      <div className="flex h-full items-end justify-between">
-                        <p className="text-lg font-semibold text-gray-800">{screen.title}</p>
-                        <Badge variant="outline" className="border-black/10 bg-white/80 text-xs text-gray-700">
-                          {idx + 1}/{selected.screens.length}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
+                  <ScreensSlider screens={selected.screens} />
                   <div className="h-48 sm:h-56" />
                 </div>
               </div>
@@ -250,7 +234,7 @@ export default function WorkPage() {
                 asChild
               >
                 <Link href={selected.link} target="_blank">
-                  Перейти на сайт проекта
+                  Открыть проект
                   <ArrowUpRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

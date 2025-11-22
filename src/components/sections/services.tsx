@@ -9,8 +9,9 @@ import { services } from "@/data/content";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export function ServicesSection() {
   const scope = useRef<HTMLDivElement | null>(null);
@@ -37,11 +38,11 @@ export function ServicesSection() {
       <div className="mb-10 flex items-end justify-between gap-4">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Услуги</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">Студийное качество под ключ.</h2>
+          <h2 className="text-3xl font-semibold sm:text-4xl">Backend, Frontend, DevOps, Консультации</h2>
         </div>
         <Button variant="outline" className="border-primary/40 bg-primary/10 text-primary">
           <Workflow className="mr-2 h-4 w-4" />
-          Формат работы
+          Формат работ
         </Button>
       </div>
 
@@ -70,9 +71,16 @@ export function ServicesSection() {
               <Button
                 variant="ghost"
                 className="group px-0 text-primary hover:text-primary hover:underline"
+                onClick={() => {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: "#contact",
+                        ease: "power2.out"
+                    });
+                }}
               >
-                Смотреть детали
-                <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  Обсудить детали
+                  <ArrowUpRight className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Button>
             </div>
           </Card>

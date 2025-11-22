@@ -12,10 +12,10 @@ import { skills } from "@/data/content";
 gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
-  { id: "frontend", title: "Фронтенд", tone: "from-yellow-200/60 to-amber-100/50" },
-  { id: "backend", title: "Бэкенд / API", tone: "from-slate-200/50 to-stone-100/60" },
-  { id: "devops", title: "DevOps", tone: "from-lime-200/50 to-amber-100/50" },
-  { id: "tools", title: "DX & дизайн", tone: "from-slate-100/60 to-white/40" },
+  { id: "backend", title: "Серверная разработка", tone: "from-slate-200/50 to-stone-100/60" },
+  { id: "devops", title: "DevOps и надёжность", tone: "from-lime-200/50 to-amber-100/50" },
+  { id: "frontend", title: "Клиентская часть", tone: "from-yellow-200/60 to-amber-100/50" },
+  { id: "tools", title: "Инструменты и процессы", tone: "from-slate-100/60 to-white/40" },
 ] as const;
 
 export function SkillsSection() {
@@ -43,10 +43,10 @@ export function SkillsSection() {
       <div className="mb-8 flex items-center justify-between gap-4">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Навыки</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">От фронта до DevOps — готово к продакшену.</h2>
+          <h2 className="text-3xl font-semibold sm:text-4xl">Backend — в основе. Всё остальное — чтобы продукт действительно работал и развивался.</h2>
         </div>
         <Badge variant="outline" className="hidden border-primary/40 bg-primary/10 text-primary sm:inline-flex">
-          Full-stack + DevOps
+          Полный цикл разработки
         </Badge>
       </div>
 
@@ -63,7 +63,7 @@ export function SkillsSection() {
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold">{group.title}</h3>
                 <Badge variant="outline" className="border-white/10 bg-white/5 text-xs uppercase tracking-wide">
-                  Motion-first
+                  Фокус на Backend
                 </Badge>
               </div>
               <Separator className="bg-white/10" />

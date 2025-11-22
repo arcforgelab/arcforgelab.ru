@@ -4,72 +4,96 @@ export const socialLinks = [
   { label: "GitHub", href: "https://github.com/arcforgelab", icon: Github },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/arcforgelab", icon: Linkedin },
   { label: "Twitter/X", href: "https://twitter.com/arcforgelab", icon: Twitter },
-  { label: "Почта", href: "mailto:hello@arcforgelab.com", icon: Mail },
+  { label: "Email", href: "mailto:hello@arcforgelab.com", icon: Mail },
 ];
 
 export const skills = {
-  frontend: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "shadcn/ui + shadcnblocks",
-    "GSAP & ScrollTrigger",
-    "Edge Rendering",
-    "Доступность (A11y)",
-  ],
   backend: [
-    "Node.js",
-    "NestJS",
-    "GraphQL",
-    "tRPC",
-    "PostgreSQL",
-    "Кэш Redis",
-    "WebSockets",
+    "Node.js + TypeScript",
+    "NestJS / tRPC",
+    "GraphQL (schema-first)",
+    "PostgreSQL / MySQL / SQLite",
+    "Redis / RabbitMQ",
+    "WebSockets / SSE",
+    "Аутентификация и RBAC",
     "Prisma ORM",
+    "Проектирование API и контрактов",
   ],
   devops: [
-    "Docker & Compose",
-    "Kubernetes",
+    "Docker / Docker Compose",
+    "Kubernetes (k8s)",
     "CI/CD (GitHub Actions)",
     "AWS / Cloudflare / Vercel",
-    "Наблюдаемость (OpenTelemetry)",
-    "Feature flags",
-    "Безопасность и SSO",
-    "Каталоги helm/terraform",
+    "Observability / OpenTelemetry",
+    "Система фич-флагов и плавных выкладок",
+    "SSO / OAuth2",
+    "Helm / Terraform (база)",
+    "Мониторинг и алертинг",
+  ],
+  frontend: [
+    "Next.js (App Router)",
+    "React (серверные компоненты)",
+    "TypeScript",
+    "Tailwind CSS",
+    "Проектирование клиентской архитектуры",
+    "Оптимизация рендера / кэширование",
+    "Edge-рендеринг",
+    "Базовые принципы доступности (a11y)",
+    "Интеграция с API / BFF / tRPC",
   ],
   tools: [
-    "Storybook",
-    "Playwright / Vitest",
-    "Figma-to-code",
-    "Design tokens",
-    "Профилирование Web Vitals",
-    "Data visualization",
-    "DX tooling",
-    "Документация и UX-рисерч",
+    "OpenAPI / GraphQL схемы",
+    "Тестирование (Playwright / Vitest)",
+    "Профилирование и оптимизация производительности",
+    "Моделирование данных и миграции",
+    "Системы разработки (DX tooling)",
+    "Runbooks и процессы реагирования на инциденты",
+    "Документация и стандарты команды",
+    "Наблюдаемость (логирование / трассировка)",
   ],
 };
 
 export const services = [
   {
-    title: "Продуктовая разработка",
+    title: "Индивидуальная разработка",
     description:
-      "С нуля до продакшена: SaaS, платформы, биллинг, авторизация, аналитика и миграции.",
-    tags: ["Next.js", "Prisma", "PostgreSQL", "Stripe"],
+      "Реализация приложений, API, админок, инфраструктурных решений. Использую лучшие практики: покрытие тестами, code review, автоматизация развёртывания",
+    tags: ["Node.js", "Bun", "ElysiaJS", "Fastify", "Express", "Python", "Django", "PHP", "Laravel", "PostgreSQL", "MongoDB", "MySQL", "SQLite", "Prisma", "pg", "MSSQL", "Docker", "Docker Compose", "Nginx", "CI/CD", "GitLab Actions", "RabbitMQ", "Sockets", "HTTP/2", "Sessions", "JWT", "React", "Next.js", "HTML5", "Tailwind", "Sass", "TypeScript",],
     accent: "from-yellow-300/45 via-amber-300/30 to-orange-200/30",
   },
   {
-    title: "Фронтенд-системы",
+    title: "Технический аудит ПО",
     description:
-      "Дизайн-системы на shadcn/ui + shadcnblocks, библиотека компонентов, анимации на GSAP.",
-    tags: ["Design tokens", "GSAP", "Доступность", "Storybook"],
+      "Провожу аудит кода, инфраструктуры и процессов с целью выявления узких мест, рисков и потенциальных точек роста. Подготовлю рекомендации по повышению надёжности и снижению издержек.",
+    tags: ["Postman", "Hoppscotch", "Swagger", "GraphQL", "REST API", "Ubuntu 20.04/22.04", "Windows 10/11", "tRPC", "YooKassa", "Auth", "RBAC", "Passport", "Microservices", "Clear Architecture", "BFF", "Integration layer",],
     accent: "from-slate-200/60 via-yellow-200/20 to-slate-100/10",
   },
   {
-    title: "Производительность и DevOps",
+    title: "Технологическое консультирование",
     description:
-      "Наблюдаемость, CI/CD, оптимизация бандлов, катастрофоустойчивость и безопасность.",
-    tags: ["Kubernetes", "Observability", "CI/CD", "Web Vitals"],
+      "Помогу определить технологический стек, архитектурные решения и организационные практики, которые обеспечат рост и устойчивость продукта. Поддержка CTO, тимлидов и продакт-менеджеров.",
+    tags: ["Kubernetes", "Docker", "CI/CD", "Cloudflare", "Vercel", "AWS", "Caching", "Feature flags", "Resilience", "Security", "Nginx", "OpenAPI", "Design tokens", "Notion", "Trello"],
+    accent: "from-emerald-200/50 via-lime-200/30 to-yellow-100/20",
+  },
+  {
+    title: "Обучение и развитие команд",
+    description:
+        "Провожу обучение разработчиков и команд: от адаптации под новые технологии до внедрения лучших инженерных практик (CI/CD, SRE, DevOps и др.). Работаю с реальными кейсами и задачами компании.",
+    tags: ["WebStorm", "VS Code", "Visual Studio", "PyCharm", "Android Studio", "CI/CD", "SRE", "DevOps", "Observability", "Monitoring", "Alerting", "JavaScript", "Python", "Dart", "C#", "PHP", "SQL", "Git", "Agile", "Lean"],
+    accent: "from-emerald-200/50 via-lime-200/30 to-yellow-100/20",
+  },
+  {
+    title: "Системное проектирование",
+    description:
+        "Разработка технической документации, спецификаций API, схем взаимодействия микросервисов и модулей. Поддержка на этапе пресейла, MVP и масштабирования.",
+    tags: ["Microservices", "Clean architecture", "REST", "GraphQL", "OpenAPI", "Swagger", "UML", "Sequence diagrams", "PostgreSQL", "MongoDB", "MySQL", "Kubernetes", "Docker", "Nginx",],
+    accent: "from-emerald-200/50 via-lime-200/30 to-yellow-100/20",
+  },
+  {
+    title: "Технический менеджмент",
+    description:
+        "Формирование команды, контроль эффективности, внедрение Agile/Lean. Строю управляемый процесс разработки с минимумом техдолга.",
+    tags: ["Agile", "Scrum", "Kanban", "Lean", "Notion", "Trello", "Slack", "Figma", "Lunacy", "Code review", "Automation", "CI/CD", "OKR", "Roadmapping", "Monitoring", "On-call", "Incident response",],
     accent: "from-emerald-200/50 via-lime-200/30 to-yellow-100/20",
   },
 ];
@@ -86,135 +110,40 @@ export type PortfolioItem = {
   link: string;
   year: string;
   favorite?: boolean;
-  screens: { title: string; bg: string }[];
+  screens: { title: string; img: string }[];
 };
 
 export const portfolioItems: PortfolioItem[] = [
   {
-    id: "neon-analytics",
-    title: "Neon Analytics",
-    description:
-      "Реалтайм-аналитика с потоковой обработкой, дашбордами и воспроизведением сценариев.",
+    id: "hoppo",
+    title: "Hoppo",
+    description: "Мобильное приложение якутского видеохостинга для детей.",
     longDescription:
-      "Проектировал архитектуру событийной шины, внедрил прогрессивный рендеринг, сделал хореографию анимаций на GSAP и построил гибкую схему ролей.",
-    tech: ["Next.js", "PostgreSQL", "ClickHouse", "GSAP"],
-    stack: ["Next.js App Router", "Prisma + ClickHouse ingest", "Edge middleware", "GSAP choreography"],
-    role: "Ведущий инженер",
-    type: "SaaS",
-    link: "https://arcforgelab.com/work/neon",
+        "Разработано приложение с безопасной медиаплатформой для детского контента. Реализована система рекомендаций, возрастные ограничения, локальный кэш медиа и адаптивный видеостриминг. Обеспечена стабильная работа на слабых устройствах.",
+    tech: ["React Native", "ElysiaJS", "Bun", "Docker", "RabbitMQ", "Redis", ""],
+    stack: ["Flutter client", "Firebase auth", "Streaming API", "Parental features"],
+    role: "Senior Backend разработчик",
+    type: "Мультимедиа",
+    link: "https://www.rustore.ru/catalog/app/com.smartom.sakhahoppokidstube",
     year: "2025",
     favorite: true,
     screens: [
-      { title: "Дашборд показателей", bg: "from-yellow-200/80 to-amber-200/60" },
-      { title: "Потоки событий", bg: "from-slate-200/80 to-stone-100/80" },
-      { title: "Сегменты и роли", bg: "from-amber-100/80 to-yellow-100/70" },
-    ],
-  },
-  {
-    id: "layered-commerce",
-    title: "Layered Commerce",
-    description:
-      "Композиционный коммёрс с headless-чекаутом, CMS-контентом и 3D-раскадровкой товаров.",
-    longDescription:
-      "Собрал headless-стек с Stripe, внедрил динамический поиск, настроил CDN-оптимизацию изображений и анимировал карточки товаров с ScrollTrigger.",
-    tech: ["React", "tRPC", "Stripe", "Three.js"],
-    stack: ["Next.js ISR", "Stripe Billing", "Three.js hero", "tRPC router"],
-    role: "Фулстек",
-    type: "E-commerce",
-    link: "https://arcforgelab.com/work/layered",
-    year: "2024",
-    favorite: true,
-    screens: [
-      { title: "Главная витрина", bg: "from-yellow-100/70 to-white" },
-      { title: "Детали товара", bg: "from-stone-100/80 to-slate-100/70" },
-      { title: "Чекаут", bg: "from-amber-100/70 to-yellow-200/60" },
-    ],
-  },
-  {
-    id: "signal-ops",
-    title: "Signal Ops",
-    description:
-      "Операционная консоль с RBAC, алертингом и AI-подсказками для сменных команд.",
-    longDescription:
-      "Реализовал GraphQL API для агрегирования метрик, оснастил интерфейс GSAP-анимациями для статусов и построил панель прав с granular-доступом.",
-    tech: ["Next.js", "NestJS", "GraphQL", "Docker"],
-    stack: ["NestJS GraphQL", "Next.js streaming", "Redis pub/sub", "GSAP status cues"],
-    role: "Техлид",
-    type: "Platform",
-    link: "https://arcforgelab.com/work/signal",
-    year: "2025",
-    screens: [
-      { title: "Мониторинг", bg: "from-slate-200/80 to-gray-100/70" },
-      { title: "Роли и доступы", bg: "from-amber-100/70 to-yellow-50/60" },
-      { title: "AI-подсказки", bg: "from-stone-100/80 to-slate-50/70" },
-    ],
-  },
-  {
-    id: "northwind-xr",
-    title: "Northwind XR",
-    description:
-      "Иммерсивный storytelling с многослойным параллаксом и WebGL-сценами.",
-    longDescription:
-      "Настроил GSAP ScrollTrigger для синхронных сцен, оптимизировал WebGL меши и добавил ленивую загрузку текстур с fallbacks.",
-    tech: ["Next.js", "GSAP", "WebGL", "Tailwind"],
-    stack: ["GSAP timelines", "WebGL layers", "Progressive hydration", "Scroll-driven story"],
-    role: "Creative Dev",
-    type: "Experience",
-    link: "https://arcforgelab.com/work/northwind",
-    year: "2024",
-    screens: [
-      { title: "XR сцена", bg: "from-amber-100/70 to-amber-200/50" },
-      { title: "Переходы", bg: "from-stone-100/80 to-slate-50/70" },
-      { title: "Навигация", bg: "from-yellow-200/60 to-amber-100/70" },
-    ],
-  },
-  {
-    id: "pulse-ui-kit",
-    title: "Pulse UI Kit",
-    description:
-      "Дизайн-система на shadcnblocks с документацией, токенами и motion-пресетами.",
-    longDescription:
-      "Построил библиотеку компонентов, добавил режим предпросмотра анимаций GSAP и экспорт токенов в Figma/Storybook.",
-    tech: ["shadcn/ui", "Storybook", "Radix", "GSAP"],
-    stack: ["Design tokens", "Storybook docs", "Radix primitives", "GSAP presets"],
-    role: "Design Engineer",
-    type: "Design System",
-    link: "https://arcforgelab.com/work/pulse",
-    year: "2023",
-    screens: [
-      { title: "Каталог компонентов", bg: "from-slate-100/80 to-stone-100/80" },
-      { title: "Анимации", bg: "from-yellow-100/80 to-amber-50/70" },
-      { title: "Темы", bg: "from-stone-50/80 to-white" },
-    ],
-  },
-  {
-    id: "aether-research",
-    title: "Aether Research",
-    description:
-      "Датастори для климатических метрик с картами, фильтрами и адаптивными нарративами.",
-    longDescription:
-      "Собрал слой визуализации на D3/Mapbox, добавил серверный поиск и плавные скролл-истории с точечными подсказками.",
-    tech: ["Next.js", "D3.js", "Mapbox", "Edge"],
-    stack: ["SSR + Edge", "Mapbox GL", "D3 charts", "ScrollTrigger narration"],
-    role: "Frontend Lead",
-    type: "Data Viz",
-    link: "https://arcforgelab.com/work/aether",
-    year: "2023",
-    screens: [
-      { title: "Карта показателей", bg: "from-yellow-50/80 to-white" },
-      { title: "Графики", bg: "from-stone-100/80 to-slate-50/70" },
-      { title: "Сторителлинг", bg: "from-amber-100/70 to-yellow-50/70" },
-    ],
-  },
+      {title: "Главный экран", img: "/cases/hoppo/games_screen.jpg"}
+    ]
+  }
 ];
 
 export const clients = [
-  { name: "Helios Labs", initials: "HL", tagline: "AI safety", hue: "from-yellow-200/60 to-amber-200/70" },
-  { name: "Vertex Ops", initials: "VO", tagline: "Cloud infra", hue: "from-slate-200/60 to-stone-100/80" },
-  { name: "Kinetic", initials: "KN", tagline: "Mobility", hue: "from-amber-100/70 to-yellow-200/60" },
-  { name: "Northwind", initials: "NW", tagline: "Energy", hue: "from-stone-100/70 to-white" },
-  { name: "Lumenary", initials: "LM", tagline: "Healthcare", hue: "from-yellow-100/70 to-amber-50/60" },
-  { name: "Atlas", initials: "AT", tagline: "Fintech", hue: "from-slate-100/80 to-stone-50/70" },
-  { name: "Quanta", initials: "QT", tagline: "Edge AI", hue: "from-amber-100/70 to-yellow-200/60" },
-  { name: "Orion", initials: "OR", tagline: "Aerospace", hue: "from-slate-200/60 to-stone-100/80" },
+  {
+    name: "Технопарк Якутия",
+    logo: "/clients/itp.png",
+    hue: "from-yellow-200/60 to-amber-200/70",
+    link: "https://tpykt.ru"
+  },
+  {
+    name: "Фонд развития инноваций",
+    logo: "/clients/fri.png",
+    hue: "from-slate-200/60 to-stone-100/80",
+    link: "https://innovationfund14.ru"
+  },
 ];

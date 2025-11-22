@@ -46,30 +46,35 @@ export function ClientsSection() {
       <div className="mb-8 flex items-center justify-between gap-4">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.3em] text-primary/80">Клиенты</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">Команды, которые ценят скорость.</h2>
+          <h2 className="text-3xl font-semibold sm:text-4xl">Команды и компании, с которыми я работал.</h2>
         </div>
-        <p className="hidden text-sm text-muted-foreground md:block">От AI и финтеха до e-commerce.</p>
+        <p className="hidden text-sm text-muted-foreground md:block">От backend, до fullstack работ.</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {clients.map((client) => (
-          <Card
-            key={client.name}
-            className="client-card floating-card relative overflow-hidden border-border/60 bg-card/80 p-4"
-          >
-            <div
-              className={`absolute inset-0 bg-gradient-to-br ${client.hue} opacity-60`}
-            />
-            <div className="relative flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-lg font-semibold">
-                {client.initials}
-              </div>
-              <div>
-                <p className="font-semibold">{client.name}</p>
-                <p className="text-xs uppercase tracking-wide text-muted-foreground">{client.tagline}</p>
-              </div>
-            </div>
-          </Card>
+            <a
+                key={client.name}
+                href={client.link}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+              <Card
+                  className="client-card floating-card relative overflow-hidden border-border/60 bg-card/80 p-4 cursor-pointer transition hover:scale-[1.015]"
+              >
+                <div
+                    className={`absolute inset-0 bg-gradient-to-br ${client.hue} opacity-60`}
+                />
+
+                <div className="relative flex items-center justify-center">
+                  <img
+                      src={client.logo}
+                      alt={client.name}
+                      className="h-12 w-auto object-contain drop-shadow-sm"
+                  />
+                </div>
+              </Card>
+            </a>
         ))}
       </div>
     </section>

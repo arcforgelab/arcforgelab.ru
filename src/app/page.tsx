@@ -15,8 +15,8 @@ export default function Home() {
       <Header />
       <main className="relative pt-20 sm:pt-24">
         <HeroSection />
-        <SkillsSection />
         <ServicesSection />
+        <SkillsSection />
         <PortfolioSection />
         <ClientsSection />
         <ContactSection />
