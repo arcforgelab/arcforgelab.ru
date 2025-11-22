@@ -63,7 +63,7 @@ export function ClientsSection() {
               <div className={`absolute inset-0 bg-gradient-to-br ${client.hue} opacity-60`} />
 
               <div className="relative flex items-center justify-center">
-                <Image src={client.logo} alt={client.name} width={140} height={48} className="h-12 w-auto object-contain" />
+                <Image src={client.logo} alt={client.name} width={140} height={48} className="object-contain" style={{ width: "auto", height: "48px" }} />
               </div>
             </Card>
           </a>

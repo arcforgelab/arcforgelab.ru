@@ -14,35 +14,45 @@ type I18nContextValue = {
 const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window === "undefined") return fallbackLanguage;
-    const stored = window.localStorage.getItem("arcforgelab:lang");
-    if (stored && languages.includes(stored as Language)) {
-      return stored as Language;
-    }
-    const prefersRussian = navigator.language?.toLowerCase().startsWith("ru");
-    return prefersRussian ? "ru" : fallbackLanguage;
-  });
+  const [mounted, setMounted] = useState(false);
+  const [language, setLanguageState] = useState<Language>(fallbackLanguage);
 
   useEffect(() => {
+    setMounted(true);
+
+    const stored = window.localStorage.getItem("arcforgelab:lang");
+    if (stored && languages.includes(stored as Language)) {
+      setLanguageState(stored as Language);
+      return;
+    }
+
+    const prefersRussian = navigator.language?.toLowerCase().startsWith("ru");
+    setLanguageState(prefersRussian ? "ru" : fallbackLanguage);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     document.documentElement.lang = language;
     window.localStorage.setItem("arcforgelab:lang", language);
-  }, [language]);
+  }, [language, mounted]);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-  };
+  if (!mounted) {
+    // пока клиент не смонтирован — рендерим fallback,
+    // но на клиенте он не отличается от SSR
+    return null;
+  }
 
-  const value = useMemo<I18nContextValue>(
-    () => ({
-      language,
-      setLanguage,
-      t: dictionaries[language],
-    }),
-    [language]
+  return (
+      <I18nContext.Provider
+          value={{
+            language,
+            setLanguage: setLanguageState,
+            t: dictionaries[language],
+          }}
+      >
+        {children}
+      </I18nContext.Provider>
   );
-
-  return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
 
 export function useI18n() {
