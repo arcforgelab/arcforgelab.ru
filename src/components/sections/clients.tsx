@@ -59,11 +59,11 @@ export function ClientsSection() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {clients.map((client) => (
           <a key={client.name} href={client.link} target="_blank" rel="noopener noreferrer">
-            <Card className="client-card floating-card relative cursor-pointer overflow-hidden border-border/70 bg-card/90 p-4 backdrop-blur-sm transition hover:scale-[1.015]">
+            <Card className="client-card floating-card relative cursor-pointer overflow-hidden bg-card/90 p-4 backdrop-blur-sm transition hover:scale-[1.015]">
               <div className={`absolute inset-0 bg-gradient-to-br ${client.hue} opacity-60`} />
 
-              <div className="relative flex items-center justify-center">
-                <Image src={client.logo} alt={client.name} width={140} height={48} className="object-contain" style={{ width: "auto", height: "48px" }} />
+              <div className="relative flex items-center justify-center h-12">
+                <Image src={client.logo} alt={client.name} width={140} height={48} className="w-auto object-contain" loading="eager"  />
               </div>
             </Card>
           </a>

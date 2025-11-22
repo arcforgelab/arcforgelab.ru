@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle} from "@/components/ui/sheet";
 import { ScreensSlider } from "@/components/ui/screen-slider";
 import { useI18n } from "@/lib/i18n";
 
@@ -214,7 +214,7 @@ export default function WorkPage() {
             </div>
           </SheetHeader>
           {selected && (
-            <div className="mt-6 space-y-4">
+            <div className="mt-6 space-y-4 px-2">
               <p className="text-muted-foreground">{selected.longDescription[language]}</p>
               <Separator className="bg-black/5" />
               <div className="space-y-2">
@@ -242,7 +242,6 @@ export default function WorkPage() {
                       title: screen.title[language],
                     }))}
                   />
-                  <div className="h-48 sm:h-56" />
                 </div>
               </div>
               <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/80" asChild>

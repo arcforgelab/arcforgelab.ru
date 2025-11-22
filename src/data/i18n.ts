@@ -171,25 +171,25 @@ const portfolioContent: LocalizedPortfolioItem[] = [
     id: "hoppo",
     title: {
       en: "Hoppo",
-      ru: "Hoppo",
+      ru: "Хоппо",
     },
     description: {
       en: "A curated video platform for children with parental controls.",
-      ru: "Курируемая видеоплатформа для детей с родительским контролем.",
+      ru: "Детская видеоплатформа для семей Якутии для повышения интереса к якутскому языку.",
     },
     longDescription: {
       en: "Built and operated the backend for a mobile kids video app: content ingestion pipeline, moderation, auth, parental controls, analytics, and operational dashboards. Delivered streaming-friendly APIs, rollout strategy, and on-call routines for the team.",
-      ru: "Собрал и поддерживал backend для мобильного детского видеоприложения: пайплайн загрузки контента, модерация, авторизация, родительский контроль, аналитика и операционные дашборды. Реализовал API под стриминг, стратегию релизов и дежурства для команды.",
+      ru: "Отвечал за общую API-систему (авторизация, работа с видео, профили детей, файлы). В рамках нагрузочного тестирования увеличил пропускную способность API с 140 до 5000 запросов в секунду за счёт улучшения системы кэширования. Благодаря применению сервис-ориентированного подхода, настройке CI/CD пайплайнов через Docker и интеграции с k8s, время вывода новых фич сократилось до 5 минут в полностью автоматическом режиме. Также в рамках сотрудничества с техническим отделом Кэскил, мы произвели интеграцию с их мультимедийной системой для работы вертикальных видео + связь пользователей разных систем друг с другом. Для ускоренной разработки административной панели, я использовал готовые компоненты от Shadcn/UI, значительно переработав и упростив многие аспекты, внедрив также и универсальные таблицы с широкой возможностью кастомизации",
     },
-    tech: ["ElysiaJS", "Bun", "Docker", "RabbitMQ", "Redis", "PostgreSQL", "GraphQL"],
-    stack: ["Flutter client", "Firebase auth", "Streaming API", "Parental features"],
+    tech: ["ElysiaJS", "Bun", "Docker", "RabbitMQ", "Redis", "PostgreSQL", "GraphQL", "Kubernetes", "Sentry", "Prometheus", "Grafana", "SMTP", "S3", "Shadcn/UI", "TailwindCSS", "Traefik", "Prisma", "NextJS"],
+    stack: ["ElysiaJS", "Bun", "Docker", "RabbitMQ", "Redis", "PostgreSQL", "GraphQL", "Kubernetes", "Sentry", "Prometheus", "Grafana", "SMTP", "S3", "Shadcn/UI", "TailwindCSS", "Traefik", "Prisma", "NextJS"],
     role: {
       en: "Senior Backend Engineer",
       ru: "Senior backend-инженер",
     },
     type: {
-      en: "Mobile app",
-      ru: "Мобильное приложение",
+      en: "api with admin",
+      ru: "API + Админка",
     },
     link: "https://www.rustore.ru/catalog/app/com.smartom.sakhahoppokidstube",
     year: "2025",
@@ -198,10 +198,118 @@ const portfolioContent: LocalizedPortfolioItem[] = [
       {
         title: {
           en: "Featured screen",
-          ru: "Экран подборки",
+          ru: "Общий экран",
+        },
+        img: "/cases/hoppo/main_screen.jpg",
+      },
+      {
+        title: {
+          en: "player screen",
+          ru: "Плеер",
+        },
+        img: "/cases/hoppo/player_screen.jpg",
+      },
+      {
+        title: {
+          en: "games screen",
+          ru: "Игры внутри приложения",
         },
         img: "/cases/hoppo/games_screen.jpg",
       },
+    ],
+  },
+  {
+    id: "uzorutum",
+    title: {
+      en: "UzorUtum",
+      ru: "УзорУтум",
+    },
+    description: {
+      en: "A curated video platform for children with parental controls.",
+      ru: "Интернет-магазин ювелирной компании.",
+    },
+    longDescription: {
+      en: "Built and operated the backend for a mobile kids video app: content ingestion pipeline, moderation, auth, parental controls, analytics, and operational dashboards. Delivered streaming-friendly APIs, rollout strategy, and on-call routines for the team.",
+      ru: "Являлся одним из первых коммерческих проектов. За две недели реализовал всё серверное API на Express, применяя DDD-подход и интегрировав ЮКассу, как платежный шлюз. Спустя полгода провёл модернизацию архитектуры и миграцию на ElysiaJS, что снизило количество ошибок и клиентских жалоб, связанных с API, на 35%, а также позволило поднять SLA до 99,67% за первый год работы.\n\nПосле оптимизации Docker-образа, перехода на Bun и перенастройки Prisma на нативную версию, размер сборки сократился с 122,27 МБ до 49,58 МБ. Впервые внедрил cron-задачи для автоматической отправки писем о предстоящей доставке, реализовал систему зон доставки с индивидуальными тарифами и автоматическим определением зоны по координатам. Для административной части использовал собственную универсальную админ-панель, разработанную в Hoppo, доработав для работы в формате PWA.",
+    },
+    tech: ["ElysiaJS", "Bun", "ExpressJS", "Docker", "RabbitMQ", "Redis", "PostgreSQL", "Prometheus", "Grafana", "SMTP", "S3", "ЮКасса", "Shadcn/UI", "TailwindCSS", "Traefik", "OpenAPI", "PWA", "Prisma", "NextJS"],
+    stack: ["ElysiaJS", "Bun", "ExpressJS", "Docker", "RabbitMQ", "Redis", "PostgreSQL", "Prometheus", "Grafana", "SMTP", "S3", "ЮКасса", "Shadcn/UI", "TailwindCSS", "Traefik", "OpenAPI", "PWA", "Prisma", "NextJS"],
+    role: {
+      en: "Senior Backend Engineer",
+      ru: "Senior backend-инженер",
+    },
+    type: {
+      en: "api with admin",
+      ru: "API + Админка",
+    },
+    link: "https://uzorutum.ru",
+    year: "2024",
+    favorite: true,
+    screens: [
+      {
+        title: {
+          en: "Api docs",
+          ru: "Документация API",
+        },
+        img: "/cases/uzorutum/api_docs.png",
+      },
+      {
+        title: {
+          en: "Catalog",
+          ru: "Каталог",
+        },
+        img: "/cases/uzorutum/catalog.png",
+      },
+      {
+        title: {
+          en: "admin",
+          ru: "Админ панель",
+        },
+        img: "/cases/uzorutum/admin.png",
+      },
+    ],
+  },
+  {
+    id: "core",
+    title: {
+      en: "Core",
+      ru: "Core",
+    },
+    description: {
+      en: "A curated video platform for children with parental controls.",
+      ru: "Локальный центр предоставления различного мультимедийного контента для отдаленных районов республики с ограниченным интернетом.",
+    },
+    longDescription: {
+      en: "Built and operated the backend for a mobile kids video app: content ingestion pipeline, moderation, auth, parental controls, analytics, and operational dashboards. Delivered streaming-friendly APIs, rollout strategy, and on-call routines for the team.",
+      ru: "Интересный проект по концепции. Участвовал как бекенд и фронтенд разработчик. Моя зона ответственности - это система форума в виде чатов, а также Push уведомления. Это было первый раз, когда я работал с сокетами на PHP. В итоге принцип оказался такой же, как и с Socket.IO",
+    },
+    tech: ["PHP", "Laravel", "Laravel Reverb", "Laravel Echo" , "Nginx", "Docker", "PostgreSQL", "Redis", "Minio", "S3", "ReactJS", "Zustand", "Tanstack Query", "Tanstack Router", "rsbuild", "TailwindCSS"],
+    stack: ["PHP", "Laravel", "Laravel Reverb", "Laravel Echo" , "Nginx", "Docker", "PostgreSQL", "Redis", "Minio S3", "React", "Zustand", "Tanstack Query", "Tanstack Router", "rsbuild", "TailwindCSS"],
+    role: {
+      en: "Senior Backend Engineer",
+      ru: "Senior backend-инженер",
+    },
+    type: {
+      en: "fullstack",
+      ru: "Fullstack",
+    },
+    link: "https://uzorutum.ru",
+    year: "2024",
+    screens: [
+      {
+        title: {
+          en: "Main page",
+          ru: "Главная",
+        },
+        img: "/cases/core/main.png",
+      },
+      {
+        title: {
+          en: "Chat",
+          ru: "Чат",
+        },
+        img: "/cases/core/chat.png",
+      }
     ],
   },
 ];
