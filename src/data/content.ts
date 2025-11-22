@@ -1,10 +1,11 @@
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import {Github, Gitlab, Linkedin, Mail, Newspaper, Send, Twitter} from "lucide-react";
 
 export const socialLinks = [
-  { label: "GitHub", href: "https://github.com/arcforgelab", icon: Github },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/arcforgelab", icon: Linkedin },
-  { label: "Twitter/X", href: "https://twitter.com/arcforgelab", icon: Twitter },
   { label: "Email", href: "mailto:hello@arcforgelab.com", icon: Mail },
+  { label: "GitHub", href: "https://github.com/arcforgelab", icon: Github },
+  { label: "GitLab", href: "https://git.smartom.dev/arcforgelab", icon: Gitlab },
+  { label: "Habr", href: "https://habr.com/ru/users/ArcForgeLab", icon: Newspaper },
+  { label: "Telegram", href: "https://t.me/arcforgelab_dev", icon: Send },
 ];
 
 export const skills = {
@@ -146,4 +147,40 @@ export const clients = [
     hue: "from-slate-200/60 to-stone-100/80",
     link: "https://innovationfund14.ru"
   },
+  {
+    name: "СмартОм",
+    logo: "/clients/smartom.png",
+    hue: "from-amber-100/70 to-yellow-200/60",
+    link: "https://smartom.dev"
+  },
+  {
+    name: "ЦОПП РС(Я)",
+    logo: "/clients/copp.png",
+    hue: "from-stone-100/70 to-white",
+    link: "https://copp14.ru/"
+  },
+  {
+    name: "UzorUtum",
+    logo: "/clients/uzorutum.png",
+    hue: "from-yellow-100/70 to-amber-50/60",
+    link: "https://uzorutum.ru"
+  },
+  {
+    name: "Keskil",
+    logo: "/clients/keskil.png",
+    hue: "from-slate-100/80 to-stone-50/70",
+    link: "https://keskil14.ru"
+  },
+  {
+    name: "Федерация волейбола РС(Я)",
+    logo: "/clients/volley.jpg",
+    hue: "from-amber-100/70 to-yellow-200/60",
+    link: "https://quanta.ai"
+  },
+  {
+    name: "TermoGroup",
+    logo: "/clients/termo.webp",
+    hue: "from-slate-200/60 to-stone-100/80",
+    link: "https://www.termogroup.kz/"
+  }
 ];

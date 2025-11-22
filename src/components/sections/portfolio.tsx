@@ -20,7 +20,9 @@ export function PortfolioSection() {
 
   useGSAP(
     () => {
-      gsap.from(scope.current?.querySelectorAll(".portfolio-card"), {
+      const cards = scope.current?.querySelectorAll(".portfolio-card");
+      if (!cards) return;
+      gsap.from(cards, {
         scrollTrigger: {
           trigger: scope.current,
           start: "top 80%",

@@ -18,7 +18,9 @@ export function ServicesSection() {
 
   useGSAP(
     () => {
-      gsap.from(scope.current?.querySelectorAll(".service-card"), {
+        const services = scope.current?.querySelectorAll(".service-card")
+        if(!services) return
+      gsap.from(services, {
         scrollTrigger: {
           trigger: scope.current,
           start: "top 80%",

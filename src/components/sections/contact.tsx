@@ -87,7 +87,7 @@ export function ContactSection() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Имя</FormLabel>
                     <FormControl>
                       <Input placeholder="Как к вам обращаться?" {...field} />
                     </FormControl>
@@ -100,7 +100,7 @@ export function ContactSection() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Почта</FormLabel>
                     <FormControl>
                       <Input placeholder="you@company.com" type="email" {...field} />
                     </FormControl>
@@ -113,7 +113,7 @@ export function ContactSection() {
                 name="project"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Project / need</FormLabel>
+                    <FormLabel>Потребности / Проект</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Опишите задачу: что нужно сделать?"

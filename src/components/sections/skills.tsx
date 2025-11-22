@@ -23,7 +23,9 @@ export function SkillsSection() {
 
   useGSAP(
     () => {
-      gsap.from(scope.current?.querySelectorAll(".skill-card"), {
+      const skills = scope.current?.querySelectorAll(".skill-card")
+      if(!skills) return;
+      gsap.from(skills, {
         scrollTrigger: {
           trigger: scope.current,
           start: "top 78%",

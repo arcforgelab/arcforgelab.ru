@@ -212,8 +212,8 @@ export function HeroSection() {
             </div>
           </div>
 
-          <Card className="floating-card relative overflow-hidden border-primary/30 bg-gradient-to-br from-white via-secondary to-amber-50 p-6 shadow-xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(248,211,58,0.2),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(255,226,119,0.28),transparent_34%)]" />
+          <Card className="floating-card relative overflow-hidden border-primary/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.95),rgba(255,250,230,0.9))] p-6 backdrop-blur-sm">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(248,211,58,0.2),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(255,226,119,0.2),transparent_34%),linear-gradient(120deg,rgba(255,255,255,0.25),transparent_45%)]" />
             <div className="relative space-y-6">
               <p className="text-sm uppercase tracking-[0.25em] text-primary/90">Что я делаю?</p>
               <p className="text-lg text-muted-foreground">
@@ -221,7 +221,7 @@ export function HeroSection() {
               </p>
               <div className="grid gap-3 sm:grid-cols-3">
                 {metrics.map((metric) => (
-                  <div key={metric.label} className="hero-metric rounded-xl border border-black/5 bg-white/70 px-3 py-4">
+                  <div key={metric.label} className="hero-metric rounded-lg border border-dashed border-primary/40 bg-white/90 px-3 py-4 backdrop-blur-sm">
                     <div className="text-2xl font-semibold text-primary">{metric.value}</div>
                     <p className="text-xs text-muted-foreground">{metric.label}</p>
                   </div>

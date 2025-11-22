@@ -60,7 +60,7 @@ export function ClientsSection() {
                 rel="noopener noreferrer"
             >
               <Card
-                  className="client-card floating-card relative overflow-hidden border-border/60 bg-card/80 p-4 cursor-pointer transition hover:scale-[1.015]"
+                  className="client-card floating-card relative overflow-hidden border-border/70 bg-card/90 p-4 cursor-pointer transition hover:scale-[1.015] backdrop-blur-sm"
               >
                 <div
                     className={`absolute inset-0 bg-gradient-to-br ${client.hue} opacity-60`}
@@ -70,7 +70,7 @@ export function ClientsSection() {
                   <img
                       src={client.logo}
                       alt={client.name}
-                      className="h-12 w-auto object-contain drop-shadow-sm"
+                      className="h-12 w-auto object-contain"
                   />
                 </div>
               </Card>
