@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Arcforgelab - backend engineer for APIs and platforms",
   description:
     "Solo backend and platform engineering: APIs, data pipelines, auth, billing, observability, and reliable releases for product teams.",
+  verification: { yandex: "82dd14821f7c3b28" },
   metadataBase: new URL("https://arcforgelab.ru"),
   openGraph: {
     title: "Arcforgelab - backend engineer for APIs and platforms",
